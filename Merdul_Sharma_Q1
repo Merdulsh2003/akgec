@@ -1,0 +1,25 @@
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+def rearrange_array(arr):
+    primes = [x for x in arr if is_prime(x)]
+    if primes:
+        l_prime = max(primes)
+        s_prime = min(primes)
+    else:
+        l_prime = s_prime = None 
+    arr_no_primes = [x for x in arr if not is_prime(x)]
+    arr_no_primes.sort(reverse=True)
+    final_array = []
+    if l_prime is not None:
+        final_array.append(l_prime)
+    final_array.extend(arr_no_primes)
+    if s_prime is not None:
+        final_array.append(s_prime)
+    return final_array
+print(rearrange_array([5, 1, 8, 11, 2]))  
+print(rearrange_array([1, 6, 4, 13, 9, 3]))  
